@@ -21,9 +21,12 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "material-ui": "^0.19.4",
+    "immutable": "^3.8.2",
+    "material-ui": "^1.0.0-beta.21",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "socket.io-client": "^2.0.4",
     "webpack": "^3.8.1"
   },
