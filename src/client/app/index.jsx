@@ -34,6 +34,7 @@ socket.on('connect', () => {
 })
 socket.on('message', (sender, text, channel) => store.dispatch(addMessage(sender, text, channel)))
 socket.on('changeState', state => store.dispatch(updateServerState(state)))
+socket.on('join', channel => store.dispatch(changeChannel(channel)))
 
 const muiTheme = createMuiTheme()
 
