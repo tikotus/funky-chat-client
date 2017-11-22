@@ -28,8 +28,13 @@ const changeChannel = (channel) => ({
 	channel
 })
 
+const setId = id => ({
+	type: 'SET_ID',
+	id
+})
+
 socket.on('connect', () => {
-	socket.emit('init')
+	socket.emit('init', id => store.dispatch(setId(id)))
 	socket.emit('join', 'general')
 })
 socket.on('message', (sender, text, channel) => store.dispatch(addMessage(sender, text, channel)))

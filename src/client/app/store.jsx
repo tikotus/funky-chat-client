@@ -14,6 +14,8 @@ function chatApp(state = initialState, action) {
 		return state.updateIn(['messages', action.channel], List(), v => v.push({ text: action.text, sender: action.sender }))
 	case 'CHANGE_CHANNEL':
 		return state.set('channel', action.channel)
+	case 'SET_ID':
+		return state.set('id', action.id)
 	case 'SEND_MESSAGE':
 		// If message starts with / then pass first word as event type, second as value. For example /join chan
 		if (state.get('outgoingMessage').charAt(0) == '/')
