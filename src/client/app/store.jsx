@@ -12,16 +12,18 @@ function chatApp(state = initialState, action) {
 		return state.merge(fromJS(action.serverState))
 	case 'ADD_MESSAGE':
 		return state.updateIn(['messages', action.channel], List(), v => v.push({ text: action.text, sender: action.sender }))
-	case 'CHANGE_CHANNEL':
+	case 'CLEAR_INPUT':
+		return state.set('outgoingMessage', null)
+	case 'JOIN_CHANNEL':
+		socket.emit('join', action.channel)
 		return state.set('channel', action.channel)
+	case 'CHANGE_NAME':
+		socket.emit('nick', action.name)
+		return state
 	case 'SET_ID':
 		return state.set('id', action.id)
 	case 'SEND_MESSAGE':
-		// If message starts with / then pass first word as event type, second as value. For example /join chan
-		if (state.get('outgoingMessage').charAt(0) == '/')
-			socket.emit(state.get('outgoingMessage').split(' ')[0].substring(1), state.get('outgoingMessage').split(' ')[1])
-		else
-			socket.emit('message', state.get('outgoingMessage'), state.get('channel'))
+		socket.emit('message', action.text, action.channel)
 		return state.set('outgoingMessage', null)
 	case 'CHANGE_MESSAGE':
 		return state.set('outgoingMessage', action.text)
