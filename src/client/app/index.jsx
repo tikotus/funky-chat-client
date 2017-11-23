@@ -45,15 +45,21 @@ const muiTheme = createMuiTheme()
 
 function App() {
 	return (
-		<Grid container spacing={24}>
-			<Grid item xs={2}>
-				<Paper><ChannelList /></Paper>
+		<div style={{padding:12}}>
+			<Grid container spacing={24}>
+				<Grid item xs={2} style={{height:'100%'}}>
+					<Paper style={{height:'100%'}}><ChannelList /></Paper>
+				</Grid>
+				<Grid item xs style={{height:'100%'}}>
+					<div style={{display:'flex', flexFlow:'column', height:'100%'}}>
+						<Paper style={{flex:'1 1 auto'}}><MessageList /></Paper>
+						<div style={{flex:'0 1 0px', paddingTop:'10px'}}>
+							<MessageField />
+						</div>
+					</div>
+				</Grid>
 			</Grid>
-			<Grid item xs>
-				<Paper><MessageList /></Paper>
-				<MessageField />
-			</Grid>
-		</Grid>
+		</div>
 	)
 }
 
