@@ -43,11 +43,11 @@ socket.on('join', channel => store.dispatch(changeChannel(channel)))
 
 function App() {
 	return (
-		<div style={{display:'flex', height:'100%', flexDirection:'row', justifyContent:'space-between', flex:1}}>
-			<Paper style={{flex:'0 1 200px', margin:'5px', padding:'5px', overflowY:'auto'}}><ChannelList /></Paper>
-			<div style={{flex:5, display:'flex', flexDirection:'column'}}>
-				<Paper style={{flex:1, margin:'5px', padding:'5px', overflowY:'auto'}}><MessageList /></Paper>
-				<Paper style={{flex:'0 1 0px', margin:'5px', padding:'5px'}}><MessageField /></Paper>
+		<div style={{ display: 'flex', height: '100%', flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
+			<Paper style={{ flex: '0 1 200px', margin: '5px', padding: '5px', overflowY: 'auto' }}><ChannelList /></Paper>
+			<div style={{ flex: 5, display: 'flex', flexDirection: 'column' }}>
+				<Paper style={{ flex: 1, margin: '5px', padding: '5px', overflowY: 'auto' }}><MessageList /></Paper>
+				<Paper style={{ flex: '0 1 0px', margin: '5px', padding: '5px' }}><MessageField /></Paper>
 			</div>
 		</div>
 	)
