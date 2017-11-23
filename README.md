@@ -12,3 +12,10 @@ when you join a channel.
 Join new channels with '/join [chan]'
 
 Change name with '/nick [name]'
+
+Build with
+
+```
+npm run build
+```
+    
