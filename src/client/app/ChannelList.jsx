@@ -51,6 +51,8 @@ const ChannelList = connect(mapStateToProps, mapDispatchToProps)(
 				<CardHeader title='Available' />
 				{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} joined={false} onClick={() => props.joinChannel(v)} />)}
 			</Card>
+			<p>{'Join new channels with "/join [chan]"'}</p>
+			<p>{'Change name with "/nick [name]"'}</p>
 		</div>
 	)
 )
