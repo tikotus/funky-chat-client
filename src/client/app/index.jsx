@@ -1,11 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { connect } from 'react-redux'
 import { Provider } from 'react-redux'
 import Paper from 'material-ui/Paper'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ChannelList from './ChannelList'
 import MessageList from './MessageList'
 import MessageField from './MessageField'
+import NameSelection from './NameSelection'
 import store from './store'
 import socket from './socket'
 
@@ -41,8 +43,8 @@ socket.on('message', (sender, text, channel) => store.dispatch(addMessage(sender
 socket.on('changeState', state => store.dispatch(updateServerState(state)))
 socket.on('join', channel => store.dispatch(changeChannel(channel)))
 
-function App() {
-	return (
+const App = connect(s => ({ name : s.get('name') }), null)(
+	props => (props.name != undefined ? (
 		<div style={{ display: 'flex', height: '100%', flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
 			<Paper style={{ flex: '0 1 200px', margin: '5px', padding: '5px', overflowY: 'auto' }}><ChannelList /></Paper>
 			<div style={{ flex: 5, display: 'flex', flexDirection: 'column' }}>
@@ -50,8 +52,8 @@ function App() {
 				<Paper style={{ flex: '0 1 0px', margin: '5px', padding: '5px' }}><MessageField /></Paper>
 			</div>
 		</div>
-	)
-}
+	) : <NameSelection />)
+)
 
 render(
 	<Provider store={store}>

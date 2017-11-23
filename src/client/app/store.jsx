@@ -3,7 +3,7 @@ import { fromJS, List } from 'immutable'
 import socket from './socket'
 
 const initialState = fromJS({
-	channel: 'general',
+	channel: 'general'
 })
 
 function chatApp(state = initialState, action) {
@@ -19,9 +19,11 @@ function chatApp(state = initialState, action) {
 		return state.set('channel', action.channel)
 	case 'CHANGE_CHANNEL':
 		return state.set('channel', action.channel)
+	case 'CHANGE_INPUT_NAME':
+		return state.set('inputName', action.inputName)
 	case 'CHANGE_NAME':
 		socket.emit('nick', action.name)
-		return state
+		return state.set('name', action.name)
 	case 'SET_ID':
 		return state.set('id', action.id)
 	case 'SEND_MESSAGE':
