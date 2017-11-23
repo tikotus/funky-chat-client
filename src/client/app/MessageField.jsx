@@ -41,8 +41,10 @@ const MessageField = connect(mapStateToProps, mapDispatchToProps)(
 		<TextField
 			style={{ width: '100%' }}
 			value={props.text}
+			hintText={'Message #' + props.channel}
+			name='message'
 			onKeyDown={e => onKeyDown(e, props.onSend, props.text, props.channel)}
-			InputProps={{ onChange: e => props.onChange(e) }} />
+			onChange={e => props.onChange(e)} />
 	)
 )
 

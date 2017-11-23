@@ -18,6 +18,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react/prop-types": 0,
         "react/jsx-uses-vars": [2], // found this from https://github.com/eslint/eslint/issues/6303
         "indent": [
             "error",

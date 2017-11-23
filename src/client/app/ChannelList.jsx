@@ -1,8 +1,7 @@
 import React from 'react'
 import List from 'material-ui/List'
-import ListItem from 'material-ui/List/ListItem'
-import ListSubheader from 'material-ui/List/ListSubheader'
 import { connect } from 'react-redux'
+import FlatButton from 'material-ui/FlatButton'
 
 
 const mapStateToProps = state => {
@@ -14,15 +13,30 @@ const mapStateToProps = state => {
 	}
 }
 
+const trimChannelName = name => {
+	if (name.length > 15)
+		return name.substring(0, 12) + '...'
+	else
+		return name
+}
+
+const ChannelListItem = props => (
+	<div>
+		<FlatButton style={{ fontWeight: props.selected ? 'bold' : 'normal' }}>
+			{trimChannelName(props.text)}
+		</FlatButton>
+		<br />
+	</div>
+)
+//<Typography type="body1" style={{fontWeight:props.selected ? 'bold' : 'normal'}} component="h3">{props.text}</Typography>
+
 const ChannelList = connect(mapStateToProps, null)(
 	props => (
 		<div>
-			<List subheader={<ListSubheader>Joined Channels</ListSubheader>}>
-				{props.joinedChannels.map((v, k) => <ListItem key={k} style={{fontWeight:v===props.channel ? 'bold' : 'normal'}}>{v}</ListItem>)}
-			</List>
-			<List subheader={<ListSubheader>Available Channels</ListSubheader>}>
-				{props.availableChannels.map((v, k) => <ListItem key={k} style={{fontWeight:v===props.channel ? 'bold' : 'normal'}}>{v}</ListItem>)}
-			</List>
+			<p>Joined</p>
+			{props.joinedChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={v === props.channel} />)}
+			<p>Available</p>
+			{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} />)}
 		</div>
 	)
 )

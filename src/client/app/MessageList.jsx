@@ -1,19 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Typography from 'material-ui/Typography'
 
 
 const mapStateToProps = state => ({
 	messages: state.getIn(['messages', state.get('channel')], [])
 })
 
-const MessageList = connect(mapStateToProps, null)(
-	props => (
-		<div>
-			<Typography type="headline" component="h3">Messages</Typography>
-			{props.messages.map((v, k) => <Typography key={k}>{v.sender + ': ' + v.text}</Typography>)}
-		</div>
-	)
-)
+class MessageList extends React.Component {
+	render() {
+		return (
+			<div>
+				{this.props.messages.map((v, k) => <div key={k}>{v.sender + ': ' + v.text}</div>)}
+				<div ref={node => this['bottom'] = node}></div>
+			</div>
+		)
+	}
 
-export default MessageList
+	componentDidUpdate() {
+		this['bottom'].scrollIntoView()
+	}
+}
+
+export default connect(mapStateToProps, null)(MessageList)
