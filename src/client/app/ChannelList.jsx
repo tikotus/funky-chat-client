@@ -1,7 +1,7 @@
 import React from 'react'
-import List from 'material-ui/List'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
+import {Card, CardHeader } from 'material-ui/Card';
 
 
 const mapStateToProps = state => {
@@ -13,6 +13,11 @@ const mapStateToProps = state => {
 	}
 }
 
+const mapDispatchToProps = dispatch => ({
+	changeChannel: channel => dispatch({type: 'CHANGE_CHANNEL', channel}),
+	joinChannel: channel => dispatch({type: 'JOIN_CHANNEL', channel})
+})
+
 const trimChannelName = name => {
 	if (name.length > 15)
 		return name.substring(0, 12) + '...'
@@ -22,21 +27,30 @@ const trimChannelName = name => {
 
 const ChannelListItem = props => (
 	<div>
-		<FlatButton style={{ fontWeight: props.selected ? 'bold' : 'normal' }}>
-			{trimChannelName(props.text)}
-		</FlatButton>
+		<FlatButton
+			style={{textAlign: 'left'}}
+			labelStyle={{fontWeight:props.selected ? 'bold' : 'normal'}}
+			primary={props.joined}
+			secondary={!props.joined}
+			label={trimChannelName(props.text)}
+			onClick={props.onClick} />
 		<br />
 	</div>
 )
 //<Typography type="body1" style={{fontWeight:props.selected ? 'bold' : 'normal'}} component="h3">{props.text}</Typography>
 
-const ChannelList = connect(mapStateToProps, null)(
+
+const ChannelList = connect(mapStateToProps, mapDispatchToProps)(
 	props => (
 		<div>
-			<p>Joined</p>
-			{props.joinedChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={v === props.channel} />)}
-			<p>Available</p>
-			{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} />)}
+			<Card style={{marginBottom:'5px'}}>
+				<CardHeader title='Joined' />
+				{props.joinedChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={v === props.channel} joined={true} onClick={() => props.changeChannel(v)} />)}
+			</Card>
+			<Card>
+				<CardHeader title='Available' />
+				{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} joined={false} onClick={() => props.joinChannel(v)} />)}
+			</Card>
 		</div>
 	)
 )

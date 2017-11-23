@@ -17,6 +17,8 @@ function chatApp(state = initialState, action) {
 	case 'JOIN_CHANNEL':
 		socket.emit('join', action.channel)
 		return state.set('channel', action.channel)
+	case 'CHANGE_CHANNEL':
+		return state.set('channel', action.channel)
 	case 'CHANGE_NAME':
 		socket.emit('nick', action.name)
 		return state
