@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const onKeyDown = (e, send, text, channel) => {
-	if (e.which == 13) {
+	if (e.which == 13 && text.length > 0) {
 		e.preventDefault()
 		send(text, channel)
 	}
