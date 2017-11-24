@@ -8,6 +8,7 @@ import ChannelList from './ChannelList'
 import MessageList from './MessageList'
 import MessageField from './MessageField'
 import NameSelection from './NameSelection'
+import ClientList from './ClientList'
 import store from './store'
 import socket from './socket'
 
@@ -44,14 +45,15 @@ socket.on('messages', (messages, channel) => messages.forEach(v => store.dispatc
 socket.on('changeState', state => store.dispatch(updateServerState(state)))
 socket.on('join', channel => store.dispatch(changeChannel(channel)))
 
-const App = connect(s => ({ name : s.get('name') }), null)(
+const App = connect(s => ({ name: s.get('name') }), null)(
 	props => (props.name != undefined ? (
 		<div style={{ display: 'flex', height: '100%', flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
 			<Paper style={{ flex: '0 1 200px', margin: '5px', padding: '5px', overflowY: 'auto' }}><ChannelList /></Paper>
-			<div style={{ flex: 5, display: 'flex', flexDirection: 'column' }}>
+			<div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 				<Paper style={{ flex: 1, margin: '5px', padding: '5px', overflowY: 'auto' }}><MessageList /></Paper>
 				<Paper style={{ flex: '0 1 0px', margin: '5px', padding: '5px' }}><MessageField /></Paper>
 			</div>
+			<Paper style={{ flex: '0 1 200px', margin: '5px', padding: '5px', overflowY: 'auto' }}><ClientList /></Paper>
 		</div>
 	) : <NameSelection />)
 )
