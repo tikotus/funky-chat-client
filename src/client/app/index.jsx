@@ -40,6 +40,7 @@ socket.on('connect', () => {
 	socket.emit('join', 'general')
 })
 socket.on('message', (sender, text, channel) => store.dispatch(addMessage(sender, text, channel)))
+socket.on('messages', (messages, channel) => messages.forEach(v => store.dispatch(addMessage(v.sender, v.text, channel))))
 socket.on('changeState', state => store.dispatch(updateServerState(state)))
 socket.on('join', channel => store.dispatch(changeChannel(channel)))
 
