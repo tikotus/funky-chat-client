@@ -44,10 +44,10 @@ const ChannelList = connect(mapStateToProps, mapDispatchToProps)(
 				<Subheader>Joined</Subheader>
 				{props.joinedChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={v === props.channel} joined={true} onClick={() => props.changeChannel(v)} />)}
 			</List>
-			<List>
+			{props.availableChannels.count() > 0 && <List>
 				<Subheader>Available</Subheader>
 				{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} joined={false} onClick={() => props.joinChannel(v)} />)}
-			</List>
+			</List>}
 			<p>{'Join new channels with "/join [chan]"'}</p>
 			<p>{'Change name with "/nick [name]"'}</p>
 		</div>
