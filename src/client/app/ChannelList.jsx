@@ -32,7 +32,6 @@ const ChannelListItem = props => (
 			onClick={props.onClick}
 			primaryText={trimChannelName(props.text)}>
 		</ListItem>
-		<br />
 	</div>
 )
 //<Typography type="body1" style={{fontWeight:props.selected ? 'bold' : 'normal'}} component="h3">{props.text}</Typography>
