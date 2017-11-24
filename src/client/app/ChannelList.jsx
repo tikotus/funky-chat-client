@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FlatButton from 'material-ui/FlatButton'
-import { Card, CardHeader } from 'material-ui/Card'
+import { List, ListItem } from 'material-ui/List'
+import Subheader from 'material-ui/Subheader'
 
 
 const mapStateToProps = state => {
@@ -27,13 +27,11 @@ const trimChannelName = name => {
 
 const ChannelListItem = props => (
 	<div>
-		<FlatButton
-			style={{ textAlign: 'left' }}
-			labelStyle={{ fontWeight: props.selected ? 'bold' : 'normal' }}
-			primary={props.joined}
-			secondary={!props.joined}
-			label={trimChannelName(props.text)}
-			onClick={props.onClick} />
+		<ListItem
+			style={{ textAlign: 'left', fontWeight: props.selected ? 'bold' : 'normal' }}
+			onClick={props.onClick}
+			primaryText={trimChannelName(props.text)}>
+		</ListItem>
 		<br />
 	</div>
 )
@@ -43,14 +41,14 @@ const ChannelListItem = props => (
 const ChannelList = connect(mapStateToProps, mapDispatchToProps)(
 	props => (
 		<div>
-			<Card style={{ marginBottom: '5px' }}>
-				<CardHeader title='Joined' />
+			<List>
+				<Subheader>Joined</Subheader>
 				{props.joinedChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={v === props.channel} joined={true} onClick={() => props.changeChannel(v)} />)}
-			</Card>
-			<Card>
-				<CardHeader title='Available' />
+			</List>
+			<List>
+				<Subheader>Available</Subheader>
 				{props.availableChannels.map((v, k) => <ChannelListItem key={k} text={v} selected={false} joined={false} onClick={() => props.joinChannel(v)} />)}
-			</Card>
+			</List>
 			<p>{'Join new channels with "/join [chan]"'}</p>
 			<p>{'Change name with "/nick [name]"'}</p>
 		</div>
