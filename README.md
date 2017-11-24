@@ -4,10 +4,7 @@ A funky chat client
 Choose a name and chat on channels.
 
 There are two different kind of channels: Joined and available. Joined channels are the one
-you have joined. You will see messages sent to these channels after you joined it. Available
-channels are channels others have joined. You can't see messages sent to available channels
-before you joined it. A future improvement would be to download old messages from a cache
-when you join a channel.
+you have joined. Available channels are channels others have joined. Old messages are loaded when the client joins a channel.
 
 Join new channels with '/join [chan]'
 
