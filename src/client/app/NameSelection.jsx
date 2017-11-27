@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import socket from './socket'
 
 const mapStateToProps = state => ({
 	inputName: state.get('inputName') || ''
@@ -9,7 +10,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	onChangeInput: inputName => dispatch({ type: 'CHANGE_INPUT_NAME', inputName }),
-	onSetName: name => dispatch({ type: 'CHANGE_NAME', name })
+	onSetName: name => {
+		socket.emit('nick', name)
+		dispatch({ type: 'CHANGE_NAME', name })
+	}
 })
 
 const NameSelection = connect(mapStateToProps, mapDispatchToProps)(

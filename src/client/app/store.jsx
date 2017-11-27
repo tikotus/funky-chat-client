@@ -1,6 +1,5 @@
 import { createStore } from 'redux'
 import { fromJS, List } from 'immutable'
-import socket from './socket'
 
 const initialState = fromJS({
 	channel: 'general'
@@ -15,20 +14,15 @@ function chatApp(state = initialState, action) {
 	case 'CLEAR_INPUT':
 		return state.set('outgoingMessage', null)
 	case 'JOIN_CHANNEL':
-		socket.emit('join', action.channel)
 		return state.set('channel', action.channel)
 	case 'CHANGE_CHANNEL':
 		return state.set('channel', action.channel)
 	case 'CHANGE_INPUT_NAME':
 		return state.set('inputName', action.inputName)
 	case 'CHANGE_NAME':
-		socket.emit('nick', action.name)
 		return state.set('name', action.name)
 	case 'SET_ID':
 		return state.set('id', action.id)
-	case 'SEND_MESSAGE':
-		socket.emit('message', action.text, action.channel)
-		return state.set('outgoingMessage', null)
 	case 'CHANGE_MESSAGE':
 		return state.set('outgoingMessage', action.text)
 	default:

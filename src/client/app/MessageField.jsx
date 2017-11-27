@@ -1,14 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
-
+import socket from './socket'
+''
 const chooseAction = (text, channel) => {
-	if (text.indexOf('/join ') == 0)
-		return { type: 'JOIN_CHANNEL', channel: text.split(' ')[1] }
-	else if (text.indexOf('/nick ') == 0)
-		return { type: 'CHANGE_NAME', name: text.split(' ')[1] }
-	else
-		return { type: 'SEND_MESSAGE', text, channel }
+	if (text.indexOf('/join ') == 0) {
+		const joinedChannel = text.split(' ')[1]
+		socket.emit('join', joinedChannel)
+		return { type: 'JOIN_CHANNEL', channel: joinedChannel }
+	}
+	else if (text.indexOf('/nick ') == 0) {
+		const name = text.split(' ')[1]
+		socket.emit('nick', name)
+		return { type: 'CHANGE_NAME', name }
+	}
+	else {
+		socket.emit('message', text, channel)
+		return undefined
+	}
 }
 
 const changeMessage = text => ({

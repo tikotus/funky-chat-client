@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { List, ListItem } from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
-
+import socket from './socket'
 
 const mapStateToProps = state => {
 	const channelContainsMe = c => c.get('joinedClientIds').contains(state.get('id'))
@@ -15,7 +15,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
 	changeChannel: channel => dispatch({ type: 'CHANGE_CHANNEL', channel }),
-	joinChannel: channel => dispatch({ type: 'JOIN_CHANNEL', channel })
+	joinChannel: channel => {
+		socket.emit('join', channel)
+		dispatch({ type: 'JOIN_CHANNEL', channel })
+	}
 })
 
 const trimChannelName = name => {

@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { connect } from 'react-redux'
 import { Provider } from 'react-redux'
 import Paper from 'material-ui/Paper'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ChannelList from './ChannelList'
 import MessageList from './MessageList'
 import MessageField from './MessageField'
