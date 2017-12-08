@@ -33,12 +33,9 @@ const ChannelListItem = props => (
 		<ListItem
 			style={{ textAlign: 'left', fontWeight: props.selected ? 'bold' : 'normal' }}
 			onClick={props.onClick}
-			primaryText={trimChannelName(props.text)}>
-		</ListItem>
+			primaryText={trimChannelName(props.text)} />
 	</div>
 )
-//<Typography type="body1" style={{fontWeight:props.selected ? 'bold' : 'normal'}} component="h3">{props.text}</Typography>
-
 
 const ChannelList = connect(mapStateToProps, mapDispatchToProps)(
 	props => (

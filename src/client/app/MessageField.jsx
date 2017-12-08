@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
 import socket from './socket'
-''
+
 const chooseAction = (text, channel) => {
 	if (text.indexOf('/join ') == 0) {
 		const joinedChannel = text.split(' ')[1]
